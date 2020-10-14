@@ -15,10 +15,10 @@
 		C08A6062252CC62A002CA451 /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A6061252CC62A002CA451 /* FilmCell.swift */; };
 		C08A6065252E0283002CA451 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A6064252E0283002CA451 /* DescriptionViewController.swift */; };
 		C08A6068252E113E002CA451 /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A6067252E113E002CA451 /* Films.swift */; };
-		C08A606B252E1440002CA451 /* FilmRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A606A252E1440002CA451 /* FilmRequest.swift */; };
+		C08A606B252E1440002CA451 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A606A252E1440002CA451 /* NetworkService.swift */; };
 		C08A606F252E312C002CA451 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A606E252E312C002CA451 /* UIAlertController.swift */; };
 		C08A6072252E4462002CA451 /* FilmDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A6071252E4462002CA451 /* FilmDescription.swift */; };
-		C08A6075252E4E38002CA451 /* FilmDescriptRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A6074252E4E38002CA451 /* FilmDescriptRequest.swift */; };
+		C08A607D2535CF22002CA451 /* ApiUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08A607C2535CF22002CA451 /* ApiUrl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +32,10 @@
 		C08A6061252CC62A002CA451 /* FilmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCell.swift; sourceTree = "<group>"; };
 		C08A6064252E0283002CA451 /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		C08A6067252E113E002CA451 /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
-		C08A606A252E1440002CA451 /* FilmRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmRequest.swift; sourceTree = "<group>"; };
+		C08A606A252E1440002CA451 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		C08A606E252E312C002CA451 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		C08A6071252E4462002CA451 /* FilmDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDescription.swift; sourceTree = "<group>"; };
-		C08A6074252E4E38002CA451 /* FilmDescriptRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDescriptRequest.swift; sourceTree = "<group>"; };
+		C08A607C2535CF22002CA451 /* ApiUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiUrl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +72,7 @@
 				C08A603F252C9F1A002CA451 /* SceneDelegate.swift */,
 				C08A6055252CA950002CA451 /* Main */,
 				C08A6056252CA957002CA451 /* Description */,
+				C08A607F2535D08F002CA451 /* ServiceLayer */,
 				C08A606D252E310E002CA451 /* Helpers */,
 				C08A6058252CA96F002CA451 /* Storyboard */,
 				C08A6057252CA968002CA451 /* Support */,
@@ -83,7 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				C08A605B252CA99A002CA451 /* Controller */,
-				C08A605A252CA995002CA451 /* View */,
 				C08A6059252CA990002CA451 /* Model */,
 			);
 			path = Main;
@@ -93,7 +93,6 @@
 			isa = PBXGroup;
 			children = (
 				C08A605E252CA9AE002CA451 /* Controller */,
-				C08A605D252CA9A8002CA451 /* View */,
 				C08A605C252CA9A3002CA451 /* Model */,
 			);
 			path = Description;
@@ -119,17 +118,10 @@
 		C08A6059252CA990002CA451 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C08A606A252E1440002CA451 /* FilmRequest.swift */,
 				C08A6067252E113E002CA451 /* Films.swift */,
+				C08A607C2535CF22002CA451 /* ApiUrl.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		C08A605A252CA995002CA451 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C08A605B252CA99A002CA451 /* Controller */ = {
@@ -145,16 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				C08A6071252E4462002CA451 /* FilmDescription.swift */,
-				C08A6074252E4E38002CA451 /* FilmDescriptRequest.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		C08A605D252CA9A8002CA451 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C08A605E252CA9AE002CA451 /* Controller */ = {
@@ -171,6 +155,14 @@
 				C08A606E252E312C002CA451 /* UIAlertController.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C08A607F2535D08F002CA451 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				C08A606A252E1440002CA451 /* NetworkService.swift */,
+			);
+			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,14 +236,14 @@
 			files = (
 				C08A6042252C9F1A002CA451 /* MainViewController.swift in Sources */,
 				C08A6068252E113E002CA451 /* Films.swift in Sources */,
-				C08A6075252E4E38002CA451 /* FilmDescriptRequest.swift in Sources */,
 				C08A6062252CC62A002CA451 /* FilmCell.swift in Sources */,
-				C08A606B252E1440002CA451 /* FilmRequest.swift in Sources */,
+				C08A606B252E1440002CA451 /* NetworkService.swift in Sources */,
 				C08A6072252E4462002CA451 /* FilmDescription.swift in Sources */,
 				C08A606F252E312C002CA451 /* UIAlertController.swift in Sources */,
 				C08A603E252C9F1A002CA451 /* AppDelegate.swift in Sources */,
 				C08A6065252E0283002CA451 /* DescriptionViewController.swift in Sources */,
 				C08A6040252C9F1A002CA451 /* SceneDelegate.swift in Sources */,
+				C08A607D2535CF22002CA451 /* ApiUrl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

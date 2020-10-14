@@ -7,11 +7,21 @@
 
 import Foundation
 
+// MARK: - Films
+
 struct Films: Decodable {
+    
+    //MARK: - Public properties
+    
     var results: [FilmDetail]
 }
 
+// MARK: - FilmDetail
+
 struct FilmDetail: Decodable {
+    
+    //MARK: - Public properties
+    
     var title: String
     var original_title: String
     var poster_path: String

@@ -23,6 +23,7 @@ final class FilmCell: UITableViewCell {
         setupCell()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -32,7 +33,7 @@ final class FilmCell: UITableViewCell {
     func set(film: FilmDetail) {
         filmName.text = film.title
         filmOriginalName.text = film.original_title
-        filmRate.text = "Рейтинг: \(String(film.vote_average))"
+        filmRate.text = Constants.filmRateText + (String(film.vote_average))
         
         guard let urlImage = URL(string: "https://image.tmdb.org/t/p/original/\(film.poster_path)") else {return}
         let data = try? Data(contentsOf: urlImage)
@@ -117,6 +118,7 @@ private extension FilmCell {
 
 private extension FilmCell {
     enum Constants {
+        static let filmRateText:String = "Рейтинг: "
         static let filmNameNumberOfLines: Int = 0
         static let filmNameFont: CGFloat = 25
         static let filmOriginalNameFont: CGFloat = 15
@@ -127,9 +129,5 @@ private extension FilmCell {
         static let filmNameRightAnchor: CGFloat = -10
         static let filmOriginalNameTopAnchor: CGFloat = 5
         static let filmRateTopAnchor: CGFloat = 20
-        
-        
-        
-        
     }
 }

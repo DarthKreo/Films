@@ -41,48 +41,52 @@ final class DescriptionViewController: UIViewController {
         let web = SFSafariViewController(url: url)
         present(web, animated: true, completion: nil)
     }
-    
+}
+
+// MARK: - SetupOptions
+
+extension DescriptionViewController {
     func setupOptions(film: FilmDetail) {
-        let description = DescriptionRequest(movieId: film)
+        let description: NetworkServiceProtocol = Requests(movieId: film)
         description.getDescription { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .failure(let error):
                 print(error)
                 DispatchQueue.main.async {
-                    self?.presentAlert(withTitle: "Error", message: "No data")
+                    self.presentAlert(withTitle: Constants.alertWithTitle, message: Constants.alertWithmessage)
                 }
             case .success(let options):
                 DispatchQueue.main.async {
-                    self?.filmName.text = options.title
-                    self?.filmOriginalName.text = options.original_title
-                    self?.filmYear.text = "Дата выхода: " + options.release_date
-                    self?.filmRate.text = "Рейтинг: " + String(options.vote_average)
+                    self.filmName.text = options.title
+                    self.filmOriginalName.text = options.original_title
+                    self.filmYear.text = Constants.filmYearText + options.release_date
+                    self.filmRate.text = Constants.filmRateText + String(options.vote_average)
                     
                     if options.budget == 0 {
-                        self?.filmBudget.text = "Бюджет: неизвестен"
+                        self.filmBudget.text = Constants.filmBudgetTextFalse
                     } else {
-                        self?.filmBudget.text = "Бюджет: " + String(options.budget) + "$" }
+                        self.filmBudget.text = Constants.filmBudgetText + String(options.budget) + Constants.filmBudgetTextEnd }
                     
-                    self?.filmRuntime.text = "Продолжительность " + String(options.runtime) + " мин."
-                    self?.filmDescription.text = options.overview
+                    self.filmRuntime.text = Constants.filmRateText + String(options.runtime) + Constants.filmRuntimeTextEnd
+                    self.filmDescription.text = options.overview
                     
                     let forHyper = options.original_title
-                        .components(separatedBy: " ")
+                        .components(separatedBy: Constants.space)
                         .filter {!$0.isEmpty}
-                        .joined(separator: "+")
-                    self?.trailerAdress = "https://www.youtube.com/results?search_query=\(forHyper)+official+trailer"
+                        .joined(separator: Constants.plus)
+                    self.trailerAdress = ApiUrl.trailerAdress + forHyper + ApiUrl.trailerAdressEnd
                     
                     var string = String()
                     for index in options.genres {
-                        string += (index.name + " ")
+                        string += (index.name + Constants.space)
                     }
-                    self?.filmGenre.text = "Жанр: " + string
+                    self.filmGenre.text = Constants.filmGenreText + string
                     
-                    guard let urlImage = URL(string: "https://image.tmdb.org/t/p/original/\(options.poster_path)") else {return}
+                    guard let urlImage = URL(string: ApiUrl.urlImage + options.poster_path) else {return}
                     let data = try? Data(contentsOf: urlImage)
                     if let image = data {
-                        self?.posterView.image = UIImage(data: image)
-                        
+                        self.posterView.image = UIImage(data: image)
                     }
                 }
             }
@@ -90,12 +94,6 @@ final class DescriptionViewController: UIViewController {
     }
 }
 
-
-// MARK: - setupOptions (from network)
-
-extension DescriptionViewController {
-    
-}
 // MARK: - Setup
 
 private extension DescriptionViewController {
@@ -270,10 +268,20 @@ private extension DescriptionViewController {
                                                                                 constant: Constants.filmDescriptionBottomAnchor)])
     }
 }
-// MARK- Constants
+// MARK: - Constants
 
 private extension DescriptionViewController {
     enum  Constants {
+        static let alertWithTitle:String = "Error"
+        static let alertWithmessage:String = "No data"
+        static let filmYearText: String = "Дата выхода: "
+        static let filmRateText: String = "Рейтинг: "
+        static let filmBudgetTextFalse: String = "Бюджет: неизвестен"
+        static let filmBudgetText: String = "Бюджет: "
+        static let filmBudgetTextEnd: String = "$"
+        static let filmRuntimeText: String = "Продолжительность "
+        static let filmRuntimeTextEnd: String = " мин."
+        static let filmGenreText: String = "Жанр: "
         static let navigationItemTitle: String = "Описание"
         static let filmNameNumberOfLines: Int = 0
         static let filmNameFont:CGFloat = 30
@@ -281,6 +289,7 @@ private extension DescriptionViewController {
         static let filmYearFont:CGFloat = 18
         static let filmDescriptionFont:CGFloat = 20
         static let trailerButtonSetTitle: String = "Трейлер"
+        
         static let trailerButtonLayerCornerRadius: CGFloat = 10
         
         static let filmNameTopAnchor: CGFloat = 5
@@ -311,5 +320,8 @@ private extension DescriptionViewController {
         static let filmDescriptionTopAnchor: CGFloat = 15
         static let filmDescriptionRightAnchor: CGFloat = -20
         static let filmDescriptionBottomAnchor: CGFloat = 20
+        
+        static let space: String = " "
+        static let plus: String = "+"
     }
 }

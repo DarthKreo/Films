@@ -7,7 +7,11 @@
 
 import Foundation
 
+// MARK: - FilmDescription
+
 struct FilmDescription: Decodable {
+    
+    //MARK: - Public properties
     
     var title: String
     var original_title: String
@@ -18,8 +22,14 @@ struct FilmDescription: Decodable {
     var overview: String
     var release_date: String
     var genres: [Genre]
+    
 }
 
+// MARK: - Genre
+
 struct Genre: Decodable {
+    
+    //MARK: - Public properties
+    
     var name: String
 }
