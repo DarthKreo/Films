@@ -119,7 +119,7 @@ private extension FilmCell {
 private extension FilmCell {
     enum Constants {
         static let filmRateText:String = "Рейтинг: "
-        static let filmNameNumberOfLines: Int = 0
+        static let filmNameNumberOfLines: Int = 4
         static let filmNameFont: CGFloat = 25
         static let filmOriginalNameFont: CGFloat = 15
         static let filmImageLeftAnchor: CGFloat = 10

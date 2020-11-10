@@ -68,7 +68,7 @@ extension DescriptionViewController {
                     } else {
                         self.filmBudget.text = Constants.filmBudgetText + String(options.budget) + Constants.filmBudgetTextEnd }
                     
-                    self.filmRuntime.text = Constants.filmRateText + String(options.runtime) + Constants.filmRuntimeTextEnd
+                    self.filmRuntime.text = Constants.filmRuntimeText + String(options.runtime) + Constants.filmRuntimeTextEnd
                     self.filmDescription.text = options.overview
                     
                     let forHyper = options.original_title
@@ -175,7 +175,6 @@ private extension DescriptionViewController {
     
     func setupFilmDescription() {
         filmDescription.font = UIFont.systemFont(ofSize: Constants.filmDescriptionFont)
-        filmDescription.textAlignment = .justified
     }
     
     func setupTrailerButton() {
@@ -261,7 +260,7 @@ private extension DescriptionViewController {
         NSLayoutConstraint.activate([
                                         filmDescription.topAnchor.constraint(equalTo: filmRuntime.bottomAnchor,
                                                                              constant: Constants.filmDescriptionTopAnchor),
-                                        filmDescription.leftAnchor.constraint(equalTo: posterView.leftAnchor),
+                                        filmDescription.leftAnchor.constraint(equalTo: filmRuntime.leftAnchor),
                                         filmDescription.rightAnchor.constraint(equalTo: view.rightAnchor,
                                                                                constant: Constants.filmDescriptionRightAnchor),
                                         filmDescription.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
@@ -287,7 +286,7 @@ private extension DescriptionViewController {
         static let filmNameFont:CGFloat = 30
         static let filmOriginalNameFont:CGFloat = 25
         static let filmYearFont:CGFloat = 18
-        static let filmDescriptionFont:CGFloat = 20
+        static let filmDescriptionFont:CGFloat = 18
         static let trailerButtonSetTitle: String = "Трейлер"
         
         static let trailerButtonLayerCornerRadius: CGFloat = 10
